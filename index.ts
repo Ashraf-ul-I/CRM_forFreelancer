@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import { PrismaClient } from './generated/prisma';
 import authRoutes from './routes/authRoutes.routes'; 
 import clientRoutes from './routes/client.routes'
-
+import projectRoutes from './routes/project.routes'
 import { errorHandler } from './middlewares/errorHandler';
 import cookieParser from 'cookie-parser';
 
@@ -19,6 +19,7 @@ app.use(express.json());
 
 app.use('/api/auth',authRoutes);
 app.use('/api/user',clientRoutes);
+app.use('/api/project',projectRoutes);
 
 app.use(errorHandler);
 
