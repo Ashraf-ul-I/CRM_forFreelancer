@@ -79,10 +79,36 @@ export const updateProject= async (req:Request,res:Response,next:NextFunction):P
 }
 
 
-export const deleteProject= async (req:Request,res:Response):Promise<any> =>{
+export const deleteProject= async (req:Request,res:Response,next:NextFunction):Promise<any> =>{
     try {
+        const userId=(req as any).user.userId;
+        const {projectId}= req.params;
         
+        //check is there any project available in db with this id
+        const project= await prisma.project.findUnique({
+            where:{
+                id:projectId
+            },
+            include:{client:true}
+        });
+
+        if (!project) {
+            return next(new AppError('Project not found', 404));
+          }
+        
+        //only the owner can delete the project not by anyone so check this also that is the user is owner of this client and project
+        if(project.client.userId !== userId){
+            return next(new AppError('You are not authorized to delete this project', 403));
+        }
+
+        await prisma.project.delete({
+            where:{
+                id:projectId,
+            }
+        });
+        res.status(200).json({success:true,message:"Project Data deleted Succesfully"})
     } catch (error) {
-        
+        next(error);
     }
-}
+};
+

@@ -5,5 +5,5 @@ const router = express.Router();
 
 router.post('/create-project',authenticate,createProject)
 router.patch('/update-project/:projectId',authenticate,updateProject);
-router.delete('delete-project/:projectId',authenticate,deleteProject)
+router.delete('/delete-project/:projectId',authenticate,deleteProject)
 export default router;
