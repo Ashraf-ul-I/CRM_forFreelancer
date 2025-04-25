@@ -112,3 +112,37 @@ export const deleteProject= async (req:Request,res:Response,next:NextFunction):P
     }
 };
 
+export const  getProjectData= async (req:Request,res:Response,next:NextFunction):Promise<any> =>{
+    try {
+       const {projectId}=req.params;
+       const userId= (req as any).user.userId;
+       const project= await prisma.project.findUnique({
+           where:{
+               id:projectId
+           },
+           //we dont need the full client data we just need the userId in client 
+           //so that we can justify that its a valid owner who want to fetch the data
+           include:{
+               client:{
+                   select:{
+                       userId:true
+                   }
+               }
+           }
+       });
+       if (!project) {
+           return next(new AppError('Project not found', 404));
+         }
+       if (project.client.userId !== userId) {
+         return next(new AppError('Unauthorized access to project data', 403));
+       }
+       return res.status(200).json({
+           success: true,
+           message: 'Project fetched successfully',
+           data: project,
+         });
+
+    } catch (error) {
+       next(error);
+    }
+}
