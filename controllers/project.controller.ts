@@ -146,3 +146,41 @@ export const  getProjectData= async (req:Request,res:Response,next:NextFunction)
        next(error);
     }
 }
+
+export const  getProjectByCLientId= async (req:Request,res:Response,next:NextFunction):Promise<any> =>{
+    try {
+       const userId= (req as any).user.userId;
+       const {clientId} = req.params;
+       
+       const client= await prisma.client.findUnique({
+        where:{
+            id:clientId
+        }
+       });
+       
+       if(!client){
+        return next(new AppError('Client not found', 404));
+       };
+
+       if(client && client.userId !== userId){
+        return next(new AppError('Unauthorized access to this client', 403));
+       }
+
+       const projects= await prisma.project.findMany({
+           where:{
+               clientId:clientId
+           },
+       });
+       if (!projects) {
+           return next(new AppError('Project not found', 404));
+         }
+       return res.status(200).json({
+           success: true,
+           message: 'Project fetched successfully',
+           data: projects,
+         });
+
+    } catch (error) {
+       next(error);
+    }
+}
