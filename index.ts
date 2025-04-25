@@ -6,6 +6,8 @@ import authRoutes from './routes/authRoutes.routes';
 import clientRoutes from './routes/client.routes'
 import projectRoutes from './routes/project.routes'
 import interactionLogRoutes from './routes/interactionLogs.routes'
+import reminderRoutes from "./routes/reminder.routes"
+
 import { errorHandler } from './middlewares/errorHandler';
 import cookieParser from 'cookie-parser';
 
@@ -22,6 +24,7 @@ app.use('/api/auth',authRoutes);
 app.use('/api/user',clientRoutes);
 app.use('/api/project',projectRoutes);
 app.use('/api/interaction-logs',interactionLogRoutes);
+app.use('/api/reminder',reminderRoutes);
 
 app.use(errorHandler);
 

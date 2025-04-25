@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 export const register = async (req: Request, res: Response,next:NextFunction): Promise<any> => {
   try {
     const { name, email, password } = req.body;
-
+    
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) {
       throw new AppError('User already exists',400);
