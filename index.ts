@@ -17,7 +17,20 @@ const app=express();
 const prisma=new PrismaClient();
  
 app.use(cookieParser());
-app.use(cors());
+
+const allowedOrigins = ['http://localhost:5173']; 
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // Allow cookies to be sent
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Allow only necessary methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Limit allowed headers
+}));
 app.use(express.json());
 
 app.use('/api/auth',authRoutes);
