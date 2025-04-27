@@ -100,7 +100,10 @@ export const updateClientData = async (
       }
   
       const clientOfUser = await prisma.client.findMany({
-        where: { userId }
+        where: { userId },
+        include:{
+          projects:true, 
+        }
       });
   
       res.status(200).json({

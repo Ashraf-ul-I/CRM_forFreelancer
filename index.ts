@@ -7,7 +7,7 @@ import clientRoutes from './routes/client.routes'
 import projectRoutes from './routes/project.routes'
 import interactionLogRoutes from './routes/interactionLogs.routes'
 import reminderRoutes from "./routes/reminder.routes"
-
+import dashboardRoutes from './routes/dashboard.routes'
 import { errorHandler } from './middlewares/errorHandler';
 import cookieParser from 'cookie-parser';
 
@@ -15,7 +15,7 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 const app=express();
 const prisma=new PrismaClient();
- 
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const allowedOrigins = ['http://localhost:5173']; 
@@ -34,11 +34,11 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/auth',authRoutes);
-app.use('/api/user',clientRoutes);
+app.use('/api/client',clientRoutes);
 app.use('/api/project',projectRoutes);
 app.use('/api/interaction-logs',interactionLogRoutes);
 app.use('/api/reminder',reminderRoutes);
-
+app.use('/api/dashboard',dashboardRoutes);
 app.use(errorHandler);
 
 const PORT=process.env.PORT || 5000;

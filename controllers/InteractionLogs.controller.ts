@@ -24,11 +24,16 @@ export const createInteractionLogs=async (req:Request,res:Response,next:NextFunc
           return next(new AppError('You do not have permission to interact with this project', 403));
         }
 
+        const parsedDate = new Date(date);
+    if (isNaN(parsedDate.getTime())) {
+      throw new AppError("Invalid date provided for date", 400); 
+    }
+
         const createLogs=await prisma.interactionLog.create({
             data:{
                 projectId:projectId,
                 clientId:project.client.id,
-                date: new Date(date),         
+                date: parsedDate,         
                 interactionType,
                 notes          
             }
