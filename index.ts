@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://crm-freelancer-f-ull-c-7kkgjppxe-ashraf-ul-is-projects.vercel.app/", 
+    origin: "https://crm-freelancer-f-ull-c-7kkgjppxe-ashraf-ul-is-projects.vercel.app", 
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
