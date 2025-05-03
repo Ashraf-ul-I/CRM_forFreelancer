@@ -14,10 +14,29 @@ import reminderRoutes from "./routes/reminder.routes";
 dotenv.config();
 const app = express();
 
-app.use(cors({
-  origin: ['https://crm-freelancer-f-ull-c-ode.vercel.app'], 
-  credentials: true,
-}));
+const allowedOrigins = [
+  "https://crm-freelancer-f-ull-c-ode.vercel.app",
+  "https://crm-freelancer-f-ull-c-ode-git-main-ashraf-ul-is-projects.vercel.app",
+  "https://crm-freelancer-f-ull-c-ode-ashraf-ul-is-projects.vercel.app"
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); 
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        console.error("❌ CORS Blocked Origin:", origin);
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
+
 
 
 const prisma = new PrismaClient();
