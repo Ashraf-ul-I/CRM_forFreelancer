@@ -14,28 +14,15 @@ import reminderRoutes from "./routes/reminder.routes";
 dotenv.config();
 const app = express();
 
-const allowedOrigins = [
-  "https://crm-freelancer-f-ull-c-ode.vercel.app",
-  "https://crm-freelancer-f-ull-c-ode-git-main-ashraf-ul-is-projects.vercel.app",
-  "https://crm-freelancer-f-ull-c-ode-ashraf-ul-is-projects.vercel.app"
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); 
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        console.error("❌ CORS Blocked Origin:", origin);
-        return callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true, 
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 
 
 
