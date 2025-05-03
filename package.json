@@ -1,13 +1,10 @@
 {
   "name": "backend",
   "version": "1.0.0",
-<<<<<<< HEAD
   "main": "index.ts",
   "scripts": {
-=======
   "main": "index.js",
  "scripts": {
->>>>>>> 931a123290eef2226801e01d49bfdf44071525ac
     "dev": "nodemon --exec ts-node index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
