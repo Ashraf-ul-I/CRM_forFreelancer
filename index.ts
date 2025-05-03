@@ -17,7 +17,11 @@ const prisma = new PrismaClient();
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const allowedOrigins = ["https://crm-freelancer-f-ull-c-ode.vercel.app"];
+
+const allowedOrigins = ["https://crm-freelancer-f-ull-c-ode.vercel.app",
+                       "https://crm-freelancer-f-ull-c-ode-git-main-ashraf-ul-is-projects.vercel.app/",
+                       "https://crm-freelancer-f-ull-c-ode-ashraf-ul-is-projects.vercel.app/",
+                       "https://crm-freelancer-f-ull-c-ode.vercel.app/"];
 app.use(
   cors({
     origin: function (origin, callback) {
