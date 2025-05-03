@@ -17,7 +17,6 @@ const prisma = new PrismaClient();
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-<<<<<<< HEAD
 const allowedOrigins = ["https://crm-freelancer-f-ull-c-ode.vercel.app"];
 app.use(
   cors({
@@ -33,7 +32,6 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"], // Limit allowed headers
   })
 );
-=======
 const allowedOrigins = ['https://crm-freelancer-f-ull-c-ode.vercel.app']; 
 app.use(cors({
   origin: function (origin, callback) {
@@ -47,7 +45,6 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Allow only necessary methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Limit allowed headers
 }));
->>>>>>> 931a123290eef2226801e01d49bfdf44071525ac
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
