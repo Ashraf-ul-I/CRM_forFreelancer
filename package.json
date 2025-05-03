@@ -1,8 +1,13 @@
 {
   "name": "backend",
   "version": "1.0.0",
+<<<<<<< HEAD
   "main": "index.ts",
   "scripts": {
+=======
+  "main": "index.js",
+ "scripts": {
+>>>>>>> 931a123290eef2226801e01d49bfdf44071525ac
     "dev": "nodemon --exec ts-node index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
@@ -33,7 +38,6 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "parser": "^0.1.4",
     "zod": "^3.24.3"
   }
 }
