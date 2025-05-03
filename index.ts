@@ -16,6 +16,7 @@ const app = express();
 
 const allowedOrigins = [
   "https://crm-freelancer-f-ull-c-ode.vercel.app",
+  "https://crm-freelancer-f-ull-c-ode.vercel.app/register",
   "https://crm-freelancer-f-ull-c-ode-git-main-ashraf-ul-is-projects.vercel.app",
   "https://crm-freelancer-f-ull-c-ode-ashraf-ul-is-projects.vercel.app"
 ];
