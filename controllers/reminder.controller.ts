@@ -74,3 +74,25 @@ export const getRemindersThisWeek = async (req: Request, res: Response, next: Ne
      next(error);
    }  
 }
+
+export const getRemindersForProject = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const userId = (req as any).user.userId;
+    const { projectId } = req.params;
+    const project = await prisma.project.findUnique({
+      where: { id: projectId },
+      include: { client: true }
+    });
+    if (!project) return next(new AppError('Project not found', 404));
+    if (project.client.userId !== userId) return next(new AppError('Unauthorized', 403));
+
+    const reminders = await prisma.reminder.findMany({
+      where: { projectId },
+      orderBy: { dueDate: 'asc' }
+    });
+
+    res.status(200).json({ success: true, reminders });
+  } catch (error) {
+    next(error);
+  }
+};

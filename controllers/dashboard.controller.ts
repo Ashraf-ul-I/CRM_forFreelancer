@@ -32,10 +32,9 @@ export const getDashboardStats = async (req: Request, res: Response, next: NextF
         _count: { status: true }
       });
   
-      // Pending projects with names
       const pendingProjects = await prisma.project.findMany({
         where: {
-          status: "Pending",
+          status: "pending",
           client: { userId }
         },
         select: {
