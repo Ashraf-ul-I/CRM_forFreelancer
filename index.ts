@@ -13,10 +13,6 @@ import reminderRoutes from "./routes/reminder.routes";
 
 dotenv.config();
 const app = express();
-const prisma = new PrismaClient();
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
 
 const allowedOrigins = [
   "https://crm-freelancer-f-ull-c-ode.vercel.app",
@@ -38,6 +34,11 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
+
+const prisma = new PrismaClient();
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
