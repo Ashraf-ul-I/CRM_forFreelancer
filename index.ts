@@ -18,7 +18,7 @@ const prisma=new PrismaClient();
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const allowedOrigins = ['http://localhost:5173']; 
+const allowedOrigins = ['https://crm-freelancer-f-ull-c-ode.vercel.app']; 
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
