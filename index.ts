@@ -36,7 +36,9 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"]
   })
 );
-
+app.get("/test", (req, res) => {
+  res.json({ message: "Test route working!" });
+});
 
 
 const prisma = new PrismaClient();
